@@ -25,7 +25,7 @@ function! ElelineBufnrWinnr() abort
     " transform to circled num: nr2char(9311 + l:bufnr)
     let l:bufnr = l:bufnr > 20 ? l:bufnr : nr2char(9311 + l:bufnr).' '
   endif
-  return '  '.l:bufnr.' ❖ '.winnr().' '
+  return l:bufnr.'❖ '.winnr()
 endfunction
 
 function! ElelineTotalBuf() abort
@@ -197,7 +197,7 @@ endfunction
 function! s:StatusLine() abort
   let l:bufnr_winnr = s:def('ElelineBufnrWinnr')
   let l:paste = s:def('ElelinePaste')
-  let l:curfname = s:def('ElelineCurFname')
+  let l:curfname = s:def('ElelineCurFname').'%m%r'
   let l:branch = s:def('ElelineGitBranch')
   let l:status = s:def('ElelineGitStatus')
   let l:error = s:def('ElelineError')
@@ -212,14 +212,14 @@ function! s:StatusLine() abort
     return l:prefix.'%<'.l:common
   endif
   let l:tot = s:def('ElelineTotalBuf')
-  let l:fsize = '%#ElelineFsize#%{ElelineFsize(@%)}%*'
-  let l:m_r_f = '%#Eleline7# %m%r%y %*'
-  let l:pos = '%#Eleline8# '.(s:font?"\ue0a1":'').'%l/%L:%c%V |'
-  let l:enc = ' %{&fenc != "" ? &fenc : &enc} | %{&bomb ? ",BOM " : ""}'
+  let l:fsize = '%#ElelineFsize#%{ElelineFsize(@%)}'
+  let l:m_r_f = '%#Eleline7# %y %*'
+  let l:pos = '%#Eleline8# '.(s:font?"\ue0a1":'').'%l/%L|'
+  let l:enc = ' %{&fenc != "" ? &fenc : &enc}|%{&bomb ? ",BOM " : ""}'
   let l:ff = '%{&ff} %*'
   let l:pct = '%#Eleline9# %P %*'
-  return l:fsize.l:common.l:status
-        \ .'%='.l:m_r_f.l:pos.l:enc.l:pct
+  return l:bufnr_winnr.l:common
+        \ .'%='.l:m_r_f.l:pos.l:pct.l:fsize
 endfunction
 
 let s:colors = {
@@ -290,11 +290,11 @@ function! s:hi(group, dark, light, ...) abort
 endfunction
 
 function! s:hi_statusline() abort
-  call s:hi('ElelineBufnrWinnr' , [232 , 178]    , [89 , '']  )
+  call s:hi('ElelineBufnrWinnr' , [236 , 140]    , [89 , '']  )
   call s:hi('ElelineTotalBuf'   , [178 , s:bg+8] , [240 , ''] )
   call s:hi('ElelinePaste'      , [232 , 178]    , [232 , 178]    , 'bold')
   call s:hi('ElelineFsize'      , [177  , s:bg+6] , [235 , ''] )
-  call s:hi('ElelineCurFname'   , [104 , s:bg+4] , [171 , '']     , 'bold' )
+  call s:hi('ElelineCurFname'   , [140 , 238] , [171 , '']     , 'bold' )
   call s:hi('ElelineGitBranch'  , [184 , s:bg+2] , [89  , '']     , 'bold' )
   call s:hi('ElelineGitStatus'  , [208 , s:bg+2] , [89  , ''])
   call s:hi('ElelineError'      , [197 , s:bg+2] , [197 , ''])
@@ -312,7 +312,7 @@ endfunction
 
 function! s:InsertStatuslineColor(mode) abort
   if a:mode ==# 'i'
-    call s:hi('ElelineBufnrWinnr' , [251, s:bg+8] , [251, s:bg+8])
+    call s:hi('ElelineBufnrWinnr' , [251, 32] , [251, 89])
   elseif a:mode ==# 'r'
     call s:hi('ElelineBufnrWinnr' , [232, 160], [232, 160])
   else
@@ -345,7 +345,7 @@ augroup eleline
   autocmd!
   autocmd User GitGutter,Startified,LanguageClientStarted call s:SetStatusLine()
   " Change colors for insert mode
-  autocmd InsertLeave * call s:hi('ElelineBufnrWinnr', [232, 178], [89, ''])
+  autocmd InsertLeave * call s:hi('ElelineBufnrWinnr', [236, 140], [89, ''])
   autocmd InsertEnter,InsertChange * call s:InsertStatuslineColor(v:insertmode)
   autocmd BufWinEnter,ShellCmdPost,BufWritePost * call s:SetStatusLine()
   autocmd FileChangedShellPost,ColorScheme * call s:SetStatusLine()
