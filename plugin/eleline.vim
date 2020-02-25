@@ -294,8 +294,8 @@ function! s:hi_statusline() abort
   call s:hi('ElelineBufnrWinnr' , [236 , 140]    , [89 , '']  )
   call s:hi('ElelineTotalBuf'   , [178 , s:bg+8] , [240 , ''] )
   call s:hi('ElelinePaste'      , [232 , 178]    , [232 , 178]    , 'bold')
-  call s:hi('ElelineFsize'      , [236 , 217] , [235 , ''] , 'bold')
-  call s:hi('ElelineCurFname'   , [236 , 217] , [171 , '']     , 'bold' )
+  call s:hi('ElelineFsize'      , [236 , 116] , [235 , ''] , 'bold')
+  call s:hi('ElelineCurFname'   , [236 , 116] , [171 , '']     , 'bold' )
   call s:hi('ElelineGitBranch'  , [184 , s:bg+2] , [89  , '']     , 'bold' )
   call s:hi('ElelineGitStatus'  , [208 , s:bg+2] , [89  , ''])
   call s:hi('ElelineError'      , [197 , s:bg+2] , [197 , ''])
@@ -306,30 +306,30 @@ function! s:hi_statusline() abort
     call s:hi('StatusLine' , [140 , s:bg+2], [140, ''] , 'none')
   endif
 
-  call s:hi('Eleline7'      , [236 , 217], [237, ''] )
-  call s:hi('Eleline8'      , [236 , 217], [238, ''] )
-  call s:hi('Eleline9'      , [236 , 217], [239, ''] )
+  call s:hi('Eleline7'      , [236 , 116], [237, ''] )
+  call s:hi('Eleline8'      , [236 , 116], [238, ''] )
+  call s:hi('Eleline9'      , [236 , 116], [239, ''] )
 endfunction
 
 function! s:InsertStatuslineColor(mode) abort
   if a:mode ==# 'i'
-    call s:hi('ElelineCurFname'   , [236 , 222] , [171 , 89]     , 'bold' )
-    call s:hi('ElelineFsize'      , [236 , 222] , [235 , 89]     , 'bold')
-    call s:hi('Eljline7'      , [236 , 222], [236, 89] )
-    call s:hi('Eleline8'      , [236 , 222], [238, 89] )
-    call s:hi('Eleline9'      , [236 , 222], [239, 89] )
-  elseif a:mode ==# 'v'
-    call s:hi('ElelineCurFname'   , [236 , 116] , [171 , 160]     , 'bold' )
-    call s:hi('ElelineFsize'      , [236 , 116] , [235 , 160]     , 'bold')
-    call s:hi('Eleline7'      , [236 , 116], [236, 160] )
-    call s:hi('Eleline8'      , [236 , 116], [238, 160] )
-    call s:hi('Eleline9'      , [236 , 116], [239, 160] )
+    call s:hi('ElelineCurFname'   , [236 , 222] , [251 , 89]     , 'bold' )
+    call s:hi('ElelineFsize'      , [236 , 222] , [251 , 89]     , 'bold')
+    call s:hi('Eljline7'      , [236 , 222], [251, 89] )
+    call s:hi('Eleline8'      , [236 , 222], [251, 89] )
+    call s:hi('Eleline9'      , [236 , 222], [251, 89] )
+  elseif a:mode ==# 'r'
+    call s:hi('ElelineCurFname'   , [236 , 217] , [232 , 160]     , 'bold' )
+    call s:hi('ElelineFsize'      , [236 , 217] , [232 , 160]     , 'bold')
+    call s:hi('Eleline7'      , [236 , 217], [232, 160] )
+    call s:hi('Eleline8'      , [236 , 217], [232, 160] )
+    call s:hi('Eleline9'      , [236 , 217], [232, 160] )
   else
-    call s:hi('ElelineCurFname'   , [236 , 203] , [171 , '']     , 'bold' )
-    call s:hi('ElelineFsize'      , [236 , 203] , [235 , '']     , 'bold')
-    call s:hi('Eleline7'      , [236 , 203], [236, ''] )
-    call s:hi('Eleline8'      , [236 , 203], [238, ''] )
-    call s:hi('Eleline9'      , [236 , 203], [239, ''] )
+    call s:hi('ElelineCurFname'   , [236 , 203] , [89 , '']     , 'bold' )
+    call s:hi('ElelineFsize'      , [236 , 203] , [89 , '']     , 'bold')
+    call s:hi('Eleline7'      , [236 , 203], [89, ''] )
+    call s:hi('Eleline8'      , [236 , 203], [89, ''] )
+    call s:hi('Eleline9'      , [236 , 203], [89, ''] )
   endif
 endfunction
 
@@ -358,11 +358,11 @@ augroup eleline
   autocmd!
   autocmd User GitGutter,Startified,LanguageClientStarted call s:SetStatusLine()
   " Change colors for insert mode
-  autocmd InsertLeave * call s:hi('ElelineCurFname'   , [236 , 217] , [89 , '']     , 'bold' )
-  autocmd InsertLeave * call s:hi('ElelineFsize'      , [236 , 217] , [89 , '']     , 'bold')
-  autocmd InsertLeave * call s:hi('Eljline7'      , [236 , 217], [89, ''] )
-  autocmd InsertLeave * call s:hi('Eleline8'      , [236 , 217], [89, ''] )
-  autocmd InsertLeave * call s:hi('Eleline9'      , [236 , 217], [89, ''] )
+  autocmd InsertLeave * call s:hi('ElelineCurFname'   , [236 , 116] , [89 , '']     , 'bold' )
+  autocmd InsertLeave * call s:hi('ElelineFsize'      , [236 , 116] , [89 , '']     , 'bold')
+  autocmd InsertLeave * call s:hi('Eljline7'      , [236 , 116], [89, ''] )
+  autocmd InsertLeave * call s:hi('Eleline8'      , [236 , 116], [89, ''] )
+  autocmd InsertLeave * call s:hi('Eleline9'      , [236 , 116], [89, ''] )
   autocmd InsertEnter,InsertChange * call s:InsertStatuslineColor(v:insertmode)
   autocmd BufWinEnter,ShellCmdPost,BufWritePost * call s:SetStatusLine()
   autocmd FileChangedShellPost,ColorScheme * call s:SetStatusLine()
