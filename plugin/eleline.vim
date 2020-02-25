@@ -358,11 +358,7 @@ augroup eleline
   autocmd!
   autocmd User GitGutter,Startified,LanguageClientStarted call s:SetStatusLine()
   " Change colors for insert mode
-  autocmd InsertLeave * call s:hi('ElelineCurFname'   , [236 , 116] , [89 , '']     , 'bold' )
-  autocmd InsertLeave * call s:hi('ElelineFsize'      , [236 , 116] , [89 , '']     , 'bold')
-  autocmd InsertLeave * call s:hi('Eljline7'      , [236 , 116], [89, ''] )
-  autocmd InsertLeave * call s:hi('Eleline8'      , [236 , 116], [89, ''] )
-  autocmd InsertLeave * call s:hi('Eleline9'      , [236 , 116], [89, ''] )
+  autocmd InsertLeave * call s:SetStatusLine()
   autocmd InsertEnter,InsertChange * call s:InsertStatuslineColor(v:insertmode)
   autocmd BufWinEnter,ShellCmdPost,BufWritePost * call s:SetStatusLine()
   autocmd FileChangedShellPost,ColorScheme * call s:SetStatusLine()
