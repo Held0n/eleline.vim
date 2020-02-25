@@ -218,8 +218,8 @@ function! s:StatusLine() abort
   let l:enc = ' %{&fenc != "" ? &fenc : &enc} | %{&bomb ? ",BOM " : ""}'
   let l:ff = '%{&ff} %*'
   let l:pct = '%#Eleline9# %P %*'
-  return l:prefix.l:tot.'%<'.l:fsize.l:common
-        \ .'%='.l:m_r_f.l:pos.l:enc.l:ff.l:pct
+  return l:common.l:fsize
+        \ .'%='.l:m_r_f.l:pos.l:enc.l:pct
 endfunction
 
 let s:colors = {
@@ -236,6 +236,8 @@ let s:colors = {
             \   247 : '#9e9e9e', 248 : '#a8a8a8', 249 : '#b2b2b2',
             \   250 : '#bcbcbc', 251 : '#c6c6c6', 252 : '#d0d0d0',
             \   253 : '#dadada', 254 : '#e4e4e4', 255 : '#eeeeee',
+
+            \   DraculaPink: '#ff79c6',
             \ }
 
 function! s:extract(group, what, ...) abort
@@ -292,7 +294,7 @@ function! s:hi_statusline() abort
   call s:hi('ElelineTotalBuf'   , [178 , s:bg+8] , [240 , ''] )
   call s:hi('ElelinePaste'      , [232 , 178]    , [232 , 178]    , 'bold')
   call s:hi('ElelineFsize'      , [250 , s:bg+6] , [235 , ''] )
-  call s:hi('ElelineCurFname'   , [171 , s:bg+4] , [171 , '']     , 'bold' )
+  call s:hi('ElelineCurFname'   , [DraculaPink , s:bg+4] , [171 , '']     , 'bold' )
   call s:hi('ElelineGitBranch'  , [184 , s:bg+2] , [89  , '']     , 'bold' )
   call s:hi('ElelineGitStatus'  , [208 , s:bg+2] , [89  , ''])
   call s:hi('ElelineError'      , [197 , s:bg+2] , [197 , ''])
