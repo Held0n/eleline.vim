@@ -25,7 +25,7 @@ function! ElelineBufnrWinnr() abort
     " transform to circled num: nr2char(9311 + l:bufnr)
     let l:bufnr = l:bufnr > 20 ? l:bufnr : nr2char(9311 + l:bufnr).' '
   endif
-  return l:bufnr.'❖ '.winnr()
+  return l:bufnr.'❖ '.winnr().' '
 endfunction
 
 function! ElelineTotalBuf() abort
@@ -201,7 +201,7 @@ function! s:StatusLine() abort
   let l:branch = s:def('ElelineGitBranch')
   let l:status = s:def('ElelineGitStatus')
   let l:error = s:def('ElelineError')
-  let l:warning = s:def('ElelineWarning')
+  let l:warning = s:def('Elelinearning')
   let l:tags = '%{exists("b:gutentags_files") ? gutentags#statusline() : ""} '
   let l:lcn = '%{ElelineLCN()}'
   let l:coc = '%{ElelineCoc()}'
@@ -213,12 +213,12 @@ function! s:StatusLine() abort
   endif
   let l:tot = s:def('ElelineTotalBuf')
   let l:fsize = '%#ElelineFsize#%{ElelineFsize(@%)}'
-  let l:m_r_f = '%#Eleline7# %y %*'
-  let l:pos = '%#Eleline8# '.(s:font?"\ue0a1":'').'%l/%L|'
+  let l:m_r_f = '%#Eleline7# '.'✷'.' %y %*'
+  let l:pos = '%#Eleline8# '.(s:font?"\ue0a1":'').'%l/%L'
   let l:enc = ' %{&fenc != "" ? &fenc : &enc}|%{&bomb ? ",BOM " : ""}'
   let l:ff = '%{&ff} %*'
-  let l:pct = '%#Eleline9# %P %*'
-  return l:bufnr_winnr.l:common
+  let l:pct = '%#Eleline9# '.'≡'.' %P %*'
+  return l:common
         \ .'%='.l:m_r_f.l:pos.l:pct.l:fsize
 endfunction
 
@@ -237,7 +237,8 @@ let s:colors = {
             \   250 : '#bcbcbc', 251 : '#c6c6c6', 252 : '#d0d0d0',
             \   253 : '#dadada', 254 : '#e4e4e4', 255 : '#eeeeee',
             \        
-            \   104 : '#8787d7', 177  : '#d787d7',
+            \   104 : '#8787d7', 177 : '#d787d7', 217 : '#f29db4',
+            \   222 : '#fce78d', 116 : '#79e6e0', 203 : '#f97070',
             \ }
 
 function! s:extract(group, what, ...) abort
@@ -293,8 +294,8 @@ function! s:hi_statusline() abort
   call s:hi('ElelineBufnrWinnr' , [236 , 140]    , [89 , '']  )
   call s:hi('ElelineTotalBuf'   , [178 , s:bg+8] , [240 , ''] )
   call s:hi('ElelinePaste'      , [232 , 178]    , [232 , 178]    , 'bold')
-  call s:hi('ElelineFsize'      , [177  , s:bg+6] , [235 , ''] )
-  call s:hi('ElelineCurFname'   , [140 , 238] , [171 , '']     , 'bold' )
+  call s:hi('ElelineFsize'      , [236 , 217] , [235 , ''] , 'bold')
+  call s:hi('ElelineCurFname'   , [236 , 217] , [171 , '']     , 'bold' )
   call s:hi('ElelineGitBranch'  , [184 , s:bg+2] , [89  , '']     , 'bold' )
   call s:hi('ElelineGitStatus'  , [208 , s:bg+2] , [89  , ''])
   call s:hi('ElelineError'      , [197 , s:bg+2] , [197 , ''])
@@ -305,18 +306,30 @@ function! s:hi_statusline() abort
     call s:hi('StatusLine' , [140 , s:bg+2], [140, ''] , 'none')
   endif
 
-  call s:hi('Eleline7'      , [249 , s:bg+3], [237, ''] )
-  call s:hi('Eleline8'      , [250 , s:bg+4], [238, ''] )
-  call s:hi('Eleline9'      , [251 , s:bg+5], [239, ''] )
+  call s:hi('Eleline7'      , [236 , 217], [237, ''] )
+  call s:hi('Eleline8'      , [236 , 217], [238, ''] )
+  call s:hi('Eleline9'      , [236 , 217], [239, ''] )
 endfunction
 
 function! s:InsertStatuslineColor(mode) abort
   if a:mode ==# 'i'
-    call s:hi('ElelineBufnrWinnr' , [251, 32] , [251, 89])
+    call s:hi('ElelineCurFname'   , [236 , 217] , [171 , 89]     , 'bold' )
+    call s:hi('ElelineFsize'      , [236 , 217] , [235 , 89]     , 'bold')
+    call s:hi('Eleline7'      , [236 , 217], [236, 89] )
+    call s:hi('Eleline8'      , [236 , 217], [238, 89] )
+    call s:hi('Eleline9'      , [236 , 217], [239, 89] )
   elseif a:mode ==# 'r'
-    call s:hi('ElelineBufnrWinnr' , [232, 160], [232, 160])
+    call s:hi('ElelineCurFname'   , [236 , 203] , [171 , 160]     , 'bold' )
+    call s:hi('ElelineFsize'      , [236 , 203] , [235 , 160]     , 'bold')
+    call s:hi('Eleline7'      , [236 , 203], [236, 160] )
+    call s:hi('Eleline8'      , [236 , 203], [238, 160] )
+    call s:hi('Eleline9'      , [236 , 203], [239, 160] )
   else
-    call s:hi('ElelineBufnrWinnr' , [232, 178], [89, ''])
+    call s:hi('ElelineCurFname'   , [236 , 116] , [171 , '']     , 'bold' )
+    call s:hi('ElelineFsize'      , [236 , 116] , [235 , '']     , 'bold')
+    call s:hi('Eleline7'      , [236 , 116], [236, ''] )
+    call s:hi('Eleline8'      , [236 , 116], [238, ''] )
+    call s:hi('Eleline9'      , [236 , 116], [239, ''] )
   endif
 endfunction
 
