@@ -201,7 +201,7 @@ function! s:StatusLine() abort
   let l:branch = s:def('ElelineGitBranch')
   let l:status = s:def('ElelineGitStatus')
   let l:error = s:def('ElelineError')
-  let l:warning = s:def('Elelinearning')
+  let l:warning = s:def('Elelinwearning')
   let l:tags = '%{exists("b:gutentags_files") ? gutentags#statusline() : ""} '
   let l:lcn = '%{ElelineLCN()}'
   let l:coc = '%{ElelineCoc()}'
@@ -315,7 +315,7 @@ function! s:InsertStatuslineColor(mode) abort
   if a:mode ==# 'i'
     call s:hi('ElelineCurFname'   , [236 , 217] , [171 , 89]     , 'bold' )
     call s:hi('ElelineFsize'      , [236 , 217] , [235 , 89]     , 'bold')
-    call s:hi('Eleline7'      , [236 , 217], [236, 89] )
+    call s:hi('Eljline7'      , [236 , 217], [236, 89] )
     call s:hi('Eleline8'      , [236 , 217], [238, 89] )
     call s:hi('Eleline9'      , [236 , 217], [239, 89] )
   elseif a:mode ==# 'r'
@@ -358,7 +358,11 @@ augroup eleline
   autocmd!
   autocmd User GitGutter,Startified,LanguageClientStarted call s:SetStatusLine()
   " Change colors for insert mode
-  autocmd InsertLeave * call s:hi('ElelineBufnrWinnr', [236, 140], [89, ''])
+  autocmd InsertLeave * call s:hi('ElelineCurFname'   , [236 , 217] , [171 , 89]     , 'bold' )
+  autocmd InsertLeave * call s:hi('ElelineFsize'      , [236 , 217] , [235 , 89]     , 'bold')
+  autocmd InsertLeave * call s:hi('Eljline7'      , [236 , 217], [236, 89] )
+  autocmd InsertLeave * call s:hi('Eleline8'      , [236 , 217], [238, 89] )
+  autocmd InsertLeave * call s:hi('Eleline9'      , [236 , 217], [239, 89] )
   autocmd InsertEnter,InsertChange * call s:InsertStatuslineColor(v:insertmode)
   autocmd BufWinEnter,ShellCmdPost,BufWritePost * call s:SetStatusLine()
   autocmd FileChangedShellPost,ColorScheme * call s:SetStatusLine()
