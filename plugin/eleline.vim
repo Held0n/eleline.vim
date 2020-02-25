@@ -366,4 +366,4 @@ augroup eleline
 augroup END
 
 let &cpoptions = s:save_cpo
-iunlet s:save_cpo
+unlet s:save_cpo
