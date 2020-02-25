@@ -237,7 +237,7 @@ let s:colors = {
             \   250 : '#bcbcbc', 251 : '#c6c6c6', 252 : '#d0d0d0',
             \   253 : '#dadada', 254 : '#e4e4e4', 255 : '#eeeeee',
             \        
-            \   104 : '#8787d7', 177  : 'd787ff',
+            \   104 : '#8787d7', 177  : '#d787d7',
             \ }
 
 function! s:extract(group, what, ...) abort
