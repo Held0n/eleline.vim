@@ -218,7 +218,7 @@ function! s:StatusLine() abort
   let l:enc = ' %{&fenc != "" ? &fenc : &enc} | %{&bomb ? ",BOM " : ""}'
   let l:ff = '%{&ff} %*'
   let l:pct = '%#Eleline9# %P %*'
-  return '✶'l:fsize.l:common.l:status.l:coc
+  return l:fsize.l:common.l:status.l:coc
         \ .'%='.l:m_r_f.l:pos.l:enc.l:pct
 endfunction
 
