@@ -358,8 +358,7 @@ augroup eleline
   autocmd!
   autocmd User GitGutter,Startified,LanguageClientStarted call s:SetStatusLine()
   " Change colors for insert mode
-  autocmd InsertLeave * call s:SetStatusLine()
-  autocmd InsertEnter,InsertChange * call s:InsertStatuslineColor(v:insertmode)
+  autocmd InsertLeave,InsertEnter,InsertChange * call s:InsertStatuslineColor(v:insertmode)
   autocmd BufWinEnter,ShellCmdPost,BufWritePost * call s:SetStatusLine()
   autocmd FileChangedShellPost,ColorScheme * call s:SetStatusLine()
   autocmd FileReadPre,ShellCmdPost,FileWritePost * call s:SetStatusLine()
@@ -367,4 +366,4 @@ augroup eleline
 augroup END
 
 let &cpoptions = s:save_cpo
-unlet s:save_cpo
+iunlet s:save_cpo
