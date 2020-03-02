@@ -333,9 +333,12 @@ function! s:InsertStatuslineColor(mode) abort
   endif
 endfunction
 
-function! s:qf() abort
-  let l:bufnr_winnr = s:def('ElelineBufnrWinnr')
-  let &l:statusline = l:bufnr_winnr."%{exists('w:quickfix_title')? ' '.w:quickfix_title : ''} %l/%L %p"
+function! s:NormalStatuslineColor() abort
+    call s:hi('ElelineCurFname'   , [236 , 140] , [89 , '']     , 'bold')
+    call s:hi('ElelineFsize'      , [236 , 140] , [89 , '']     , 'bold')
+    call s:hi('Eleline7'      , [236 , 140], [89, ''] )
+    call s:hi('Eleline8'      , [236 , 140], [89, ''] )
+    call s:hi('Eleline9'      , [236 , 140], [89, ''] )
 endfunction
 
 " Note that the "%!" expression is evaluated in the context of the
@@ -358,11 +361,7 @@ augroup eleline
   autocmd!
   autocmd User GitGutter,Startified,LanguageClientStarted call s:SetStatusLine()
   " Change colors for insert mode
-  autocmd InsertLeave * call s:hi('ElelineCurFname'   , [236 , 140] , [89 , '']     , 'bold' )
-  autocmd InsertLeave * call s:hi('ElelineFsize'      , [236 , 140] , [89 , '']     , 'bold')
-  autocmd InsertLeave * call s:hi('Eleline7'      , [236 , 140], [89, ''] )
-  autocmd InsertLeave * call s:hi('Eleline8'      , [236 , 140], [89, ''] )
-  autocmd InsertLeave * call s:hi('Eleline9'      , [236 , 140], [89, ''] )
+  autocmd InsertLeave * call s:NormalStatuslineColor()
   autocmd InsertEnter,InsertChange * call s:InsertStatuslineColor(v:insertmode)
   autocmd BufWinEnter,ShellCmdPost,BufWritePost * call s:SetStatusLine()
   autocmd FileChangedShellPost,ColorScheme * call s:SetStatusLine()
